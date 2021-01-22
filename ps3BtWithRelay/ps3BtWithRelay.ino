@@ -33,8 +33,14 @@ void setup() {
     while (1); //halt
   }
   Serial.print(F("\r\nPS3 Bluetooth Library Started"));
+  pinMode(2, OUTPUT);
+  pinMode(3, OUTPUT);
   pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT);
+  digitalWrite (2, HIGH);
+  digitalWrite (3, HIGH);
   digitalWrite (4, HIGH);
+  digitalWrite (5, HIGH);
 }
 void loop() {
   Usb.Task();
@@ -83,7 +89,7 @@ void loop() {
 
     int captura2 = 0;
     if (PS3.getAnalogButton(TRIANGLE)) {
-      Serial.print(F("\r\nBotón de cruz presionado y registro de lectura mayor a 100"));
+      Serial.print(F("\r\nBotón de triangulo presionado y registro de lectura mayor a 100"));
       captura2 = PS3.getAnalogButton(TRIANGLE);
       if (captura > 100) {
         //delay(500);
@@ -103,7 +109,7 @@ void loop() {
 
     int captura3 = 0;
     if (PS3.getAnalogButton(SQUARE)) {
-      Serial.print(F("\r\nBotón de cruz presionado y registro de lectura mayor a 100"));
+      Serial.print(F("\r\nBotón de cuadrado presionado y registro de lectura mayor a 100"));
       captura3 = PS3.getAnalogButton(SQUARE);
       if (captura > 100) {
         //delay(500);
@@ -123,7 +129,7 @@ void loop() {
 
     int captura4 = 0;
     if (PS3.getAnalogButton(CIRCLE)) {
-      Serial.print(F("\r\nBotón de cruz presionado y registro de lectura mayor a 100"));
+      Serial.print(F("\r\nBotón de circulo presionado y registro de lectura mayor a 100"));
       captura2 = PS3.getAnalogButton(CIRCLE);
       if (captura > 100) {
         //delay(500);
