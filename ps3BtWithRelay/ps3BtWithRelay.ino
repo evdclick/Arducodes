@@ -91,7 +91,7 @@ void loop() {
     if (PS3.getAnalogButton(TRIANGLE)) {
       Serial.print(F("\r\nBotón de triangulo presionado y registro de lectura mayor a 100"));
       captura2 = PS3.getAnalogButton(TRIANGLE);
-      if (captura > 100) {
+      if (captura2 > 100) {
         //delay(500);
 
         Serial.println(PS3.getAnalogButton(TRIANGLE));
@@ -111,7 +111,7 @@ void loop() {
     if (PS3.getAnalogButton(SQUARE)) {
       Serial.print(F("\r\nBotón de cuadrado presionado y registro de lectura mayor a 100"));
       captura3 = PS3.getAnalogButton(SQUARE);
-      if (captura > 100) {
+      if (captura3 > 100) {
         //delay(500);
 
         Serial.println(PS3.getAnalogButton(SQUARE));
@@ -130,8 +130,8 @@ void loop() {
     int captura4 = 0;
     if (PS3.getAnalogButton(CIRCLE)) {
       Serial.print(F("\r\nBotón de circulo presionado y registro de lectura mayor a 100"));
-      captura2 = PS3.getAnalogButton(CIRCLE);
-      if (captura > 100) {
+      captura4 = PS3.getAnalogButton(CIRCLE);
+      if (captura4 > 100) {
         //delay(500);
 
         Serial.println(PS3.getAnalogButton(CIRCLE));
