@@ -58,15 +58,43 @@ void loop() {
     if (PS3.getAnalogHat(LeftHatX) > 137 || PS3.getAnalogHat(LeftHatX) < 117 || PS3.getAnalogHat(LeftHatY) > 137 || PS3.getAnalogHat(LeftHatY) < 117 || PS3.getAnalogHat(RightHatX) > 137 || PS3.getAnalogHat(RightHatX) < 117 || PS3.getAnalogHat(RightHatY) > 137 || PS3.getAnalogHat(RightHatY) < 117) {
       Serial.print(F("\r\nLeftHatX: "));
       Serial.print(PS3.getAnalogHat(LeftHatX));
+
+      if (PS3.getAnalogHat(LeftHatX) < 50) {
+        digitalWrite (4, LOW);
+      }
+      else {
+        digitalWrite (4, LOW);
+      }
+
+      if (PS3.getAnalogHat(LeftHatX) > 200) {
+        digitalWrite (5, LOW);
+      }
+      else {
+        digitalWrite (5, LOW);
+      }
+
+
+
+      
       Serial.print(F("\tLeftHatY: "));
       Serial.print(PS3.getAnalogHat(LeftHatY));
-      int lecturJiVert = PS3.getAnalogHat(LeftHatY);
+
       if (PS3.getAnalogHat(LeftHatY) < 50) {
         digitalWrite (2, LOW);
       }
       else {
         digitalWrite (2, LOW);
       }
+
+      if (PS3.getAnalogHat(LeftHatY) > 200) {
+        digitalWrite (3, LOW);
+      }
+      else {
+        digitalWrite (3, LOW);
+      }
+
+
+
 
       if (PS3.PS3Connected) { // The Navigation controller only have one joystick
         Serial.print(F("\tRightHatX: "));
