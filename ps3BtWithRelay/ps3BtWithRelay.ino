@@ -120,22 +120,6 @@ void loop() {
       captura = PS3.getAnalogButton(CROSS);
       if (captura > 100) {
         Serial.println(PS3.getAnalogButton(CROSS));
-        digitalWrite (2, LOW);
-      }
-      else {
-        digitalWrite (2, HIGH);
-      }
-    }
-    else {
-      digitalWrite (2, HIGH);
-    }
-
-    int captura2 = 0;
-    if (PS3.getAnalogButton(TRIANGLE)) {
-      Serial.print(F("\r\nBotón de triangulo presionado y registro de lectura mayor a 100"));
-      captura2 = PS3.getAnalogButton(TRIANGLE);
-      if (captura2 > 100) {
-        Serial.println(PS3.getAnalogButton(TRIANGLE));
         digitalWrite (3, LOW);
       }
       else {
@@ -144,6 +128,22 @@ void loop() {
     }
     else {
       digitalWrite (3, HIGH);
+    }
+
+    int captura2 = 0;
+    if (PS3.getAnalogButton(TRIANGLE)) {
+      Serial.print(F("\r\nBotón de triangulo presionado y registro de lectura mayor a 100"));
+      captura2 = PS3.getAnalogButton(TRIANGLE);
+      if (captura2 > 100) {
+        Serial.println(PS3.getAnalogButton(TRIANGLE));
+        digitalWrite (2, LOW);
+      }
+      else {
+        digitalWrite (2, HIGH);
+      }
+    }
+    else {
+      digitalWrite (2, HIGH);
     }
 
     int captura3 = 0;
