@@ -3,10 +3,8 @@
   For more information visit my blog: http://blog.tkjelectronics.dk/ or
   send me an e-mail:  kristianl@tkjelectronics.com
 */
-
 #include <PS3BT.h>
 #include <usbhub.h>
-
 // Satisfy the IDE, which needs to see the include statment in the ino too.
 #ifdef dobogusinclude
 #include <spi4teensy3.h>
@@ -37,10 +35,21 @@ void setup() {
   pinMode(3, OUTPUT);
   pinMode(4, OUTPUT);
   pinMode(5, OUTPUT);
+  pinMode(6, OUTPUT);
+  pinMode(7, OUTPUT);
+  pinMode(8, OUTPUT);
+  pinMode(12, OUTPUT);
   digitalWrite (2, HIGH);
   digitalWrite (3, HIGH);
   digitalWrite (4, HIGH);
   digitalWrite (5, HIGH);
+  digitalWrite (6, HIGH);
+  digitalWrite (7, HIGH);
+  digitalWrite (8, HIGH);
+  digitalWrite (12, HIGH);
+
+
+
 }
 void loop() {
   Usb.Task();
@@ -51,6 +60,14 @@ void loop() {
       Serial.print(PS3.getAnalogHat(LeftHatX));
       Serial.print(F("\tLeftHatY: "));
       Serial.print(PS3.getAnalogHat(LeftHatY));
+      int lecturJiVert = PS3.getAnalogHat(LeftHatY);
+      if (PS3.getAnalogHat(LeftHatY) < 50) {
+        digitalWrite (2, LOW);
+      }
+      else {
+        digitalWrite (2, LOW);
+      }
+
       if (PS3.PS3Connected) { // The Navigation controller only have one joystick
         Serial.print(F("\tRightHatX: "));
         Serial.print(PS3.getAnalogHat(RightHatX));
@@ -68,17 +85,15 @@ void loop() {
         Serial.print(PS3.getAnalogButton(R2));
       }
     }
+
     int captura = 0;
     if (PS3.getAnalogButton(CROSS)) {
       Serial.print(F("\r\nBotón de cruz presionado y registro de lectura mayor a 100"));
       captura = PS3.getAnalogButton(CROSS);
       if (captura > 100) {
-        //delay(500);
-
         Serial.println(PS3.getAnalogButton(CROSS));
         digitalWrite (2, LOW);
       }
-
       else {
         digitalWrite (2, HIGH);
       }
@@ -92,12 +107,9 @@ void loop() {
       Serial.print(F("\r\nBotón de triangulo presionado y registro de lectura mayor a 100"));
       captura2 = PS3.getAnalogButton(TRIANGLE);
       if (captura2 > 100) {
-        //delay(500);
-
         Serial.println(PS3.getAnalogButton(TRIANGLE));
         digitalWrite (3, LOW);
       }
-
       else {
         digitalWrite (3, HIGH);
       }
@@ -106,18 +118,14 @@ void loop() {
       digitalWrite (3, HIGH);
     }
 
-
     int captura3 = 0;
     if (PS3.getAnalogButton(SQUARE)) {
       Serial.print(F("\r\nBotón de cuadrado presionado y registro de lectura mayor a 100"));
       captura3 = PS3.getAnalogButton(SQUARE);
       if (captura3 > 100) {
-        //delay(500);
-
         Serial.println(PS3.getAnalogButton(SQUARE));
         digitalWrite (4, LOW);
       }
-
       else {
         digitalWrite (4, HIGH);
       }
@@ -126,14 +134,11 @@ void loop() {
       digitalWrite (4, HIGH);
     }
 
-
     int captura4 = 0;
     if (PS3.getAnalogButton(CIRCLE)) {
       Serial.print(F("\r\nBotón de circulo presionado y registro de lectura mayor a 100"));
       captura4 = PS3.getAnalogButton(CIRCLE);
       if (captura4 > 100) {
-        //delay(500);
-
         Serial.println(PS3.getAnalogButton(CIRCLE));
         digitalWrite (5, LOW);
       }
@@ -145,12 +150,6 @@ void loop() {
     else {
       digitalWrite (5, HIGH);
     }
-
-
-
-
-
-
 
     if (PS3.getButtonClick(PS)) {
       Serial.print(F("\r\nPS"));
@@ -176,7 +175,7 @@ void loop() {
       //delay(1000);
       if (PS3.getButtonClick(SQUARE)) {
         Serial.print(F("\r\nSquare"));
-        digitalWrite (4, HIGH);
+        //digitalWrite (4, HIGH);
       }
 
       if (PS3.getButtonClick(UP)) {
