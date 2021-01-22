@@ -63,14 +63,14 @@ void loop() {
         digitalWrite (4, LOW);
       }
       else {
-        digitalWrite (4, LOW);
+        digitalWrite (4, HIGH);
       }
 
       if (PS3.getAnalogHat(LeftHatX) > 200) {
         digitalWrite (5, LOW);
       }
       else {
-        digitalWrite (5, LOW);
+        digitalWrite (5, HIGH);
       }
 
 
@@ -83,14 +83,14 @@ void loop() {
         digitalWrite (2, LOW);
       }
       else {
-        digitalWrite (2, LOW);
+        digitalWrite (2, HIGH);
       }
 
       if (PS3.getAnalogHat(LeftHatY) > 200) {
         digitalWrite (3, LOW);
       }
       else {
-        digitalWrite (3, LOW);
+        digitalWrite (3, HIGH);
       }
 
 
