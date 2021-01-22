@@ -64,7 +64,7 @@ void loop() {
       Serial.print(F("\r\nLeftHatX: "));
       Serial.print(PS3.getAnalogHat(LeftHatX));
 
-      if (PS3.getAnalogHat(LeftHatX) < 80) {
+      if (PS3.getAnalogHat(LeftHatX) < 30) {
         digitalWrite (4, LOW);
         leftFlag = true;
       }
@@ -73,7 +73,7 @@ void loop() {
         leftFlag = false;
       }
 
-      if (PS3.getAnalogHat(LeftHatX) > 170) {
+      if (PS3.getAnalogHat(LeftHatX) > 220) {
         digitalWrite (5, LOW);
         rightFlag = true;
       }
@@ -86,7 +86,7 @@ void loop() {
       Serial.print(F("\tLeftHatY: "));
       Serial.print(PS3.getAnalogHat(LeftHatY));
 
-      if (PS3.getAnalogHat(LeftHatY) < 80) {
+      if (PS3.getAnalogHat(LeftHatY) < 30) {
         digitalWrite (2, LOW);
         upFlag = true;
       }
@@ -95,7 +95,7 @@ void loop() {
         upFlag = false;
       }
 
-      if (PS3.getAnalogHat(LeftHatY) > 170) {
+      if (PS3.getAnalogHat(LeftHatY) > 220) {
         digitalWrite (3, LOW);
         downFlag = true;
       }
@@ -137,9 +137,9 @@ void loop() {
         digitalWrite (3, HIGH);
       }
     }
-    //    else {
-    //      digitalWrite (3, HIGH);
-    //    }
+    else if (downFlag == false) {
+      digitalWrite (3, HIGH);
+    }
 
     int captura2 = 0;
     if (PS3.getAnalogButton(TRIANGLE) && upFlag == false) {
@@ -153,9 +153,9 @@ void loop() {
         digitalWrite (2, HIGH);
       }
     }
-    //    else {
-    //      digitalWrite (2, HIGH);
-    //    }
+    else if (upFlag == false) {
+      digitalWrite (2, HIGH);
+    }
 
     int captura3 = 0;
     if (PS3.getAnalogButton(SQUARE) && leftFlag == false) {
@@ -169,9 +169,9 @@ void loop() {
         digitalWrite (4, HIGH);
       }
     }
-    //   else {
-    //     digitalWrite (4, HIGH);
-    //   }
+    else if (leftFlag == false) {
+      digitalWrite (4, HIGH);
+    }
 
     int captura4 = 0;
     if (PS3.getAnalogButton(CIRCLE) && rightFlag == false) {
@@ -186,9 +186,9 @@ void loop() {
         digitalWrite (5, HIGH);
       }
     }
-    //    else {
-    //      digitalWrite (5, HIGH);
-    //    }
+    else if (rightFlag == false) {
+      digitalWrite (5, HIGH);
+    }
 
     if (PS3.getButtonClick(PS)) {
       Serial.print(F("\r\nPS"));
