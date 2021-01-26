@@ -29,10 +29,19 @@ void setup() {
   Serial.print(F("\r\nPS3 Bluetooth Library Started"));
 
   //Init digital outputs
-  for (int pinRelay = 2; pinRelay++; pinRelay <= 5) {
-    pinMode (pinRelay, OUTPUT);
-    digitalWrite (pinRelay, HIGH);
-  }
+
+  pinMode (2, OUTPUT);
+  digitalWrite (2, HIGH);
+  pinMode (3, OUTPUT);
+  digitalWrite (3, HIGH);
+  pinMode (4, OUTPUT);
+  digitalWrite (4, HIGH);
+  pinMode (5, OUTPUT);
+  digitalWrite (5, HIGH);
+//  for (int pinRelay = 2; pinRelay++; pinRelay < 6) {
+//    pinMode (pinRelay, OUTPUT);
+//    digitalWrite (pinRelay, HIGH);
+//  }
 
 }
 void loop() {
