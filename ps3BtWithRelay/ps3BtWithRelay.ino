@@ -66,38 +66,31 @@ void loop() {
 
 
   if (ps3StatusOn  || ps3NavOn) {
-    if (joiLeftLeft) {
+    if (joiLeftUp || joiLeftLeft) {
       digitalWrite (2, LOW);
     }
     else {
       digitalWrite (2, HIGH);
     }
-    if (joiRightLeft) {
+    if (joiRightUp || joiRightLeft) {
       digitalWrite (4, LOW);
     }
     else {
       digitalWrite (4, HIGH);
     }
 
- /*   
-    if (joiLeftDown || joiRightDown ) {
-      digitalWrite (5, LOW);
+    if (joiLeftDown || joiLeftRight) {
       digitalWrite (3, LOW);
-    } else {
-      digitalWrite (5, HIGH);
+    }
+    else {
       digitalWrite (3, HIGH);
     }
-    */
-    /*   if (joiLeftLeft || joiRightLeft) {
-         digitalWrite(2, LOW);
-       } else {
-         digitalWrite(2, LOW);
-       }
-       if (joiLeftRight || joiRightRight) {
-         digitalWrite(3, LOW);
-       } else {
-         digitalWrite(3, HIGH);
-       }*/
+    if (joiRightDown || joiRightRight) {
+      digitalWrite (5, LOW);
+    }
+    else {
+      digitalWrite (5, HIGH);
+    }
   }
 }
 
