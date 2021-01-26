@@ -38,10 +38,6 @@ void setup() {
   digitalWrite (4, HIGH);
   pinMode (5, OUTPUT);
   digitalWrite (5, HIGH);
-//  for (int pinRelay = 2; pinRelay++; pinRelay < 6) {
-//    pinMode (pinRelay, OUTPUT);
-//    digitalWrite (pinRelay, HIGH);
-//  }
 
 }
 void loop() {
@@ -68,6 +64,11 @@ void loop() {
   bool squareButOn = PS3.getAnalogButton(SQUARE) &&  PS3.getAnalogButton(SQUARE) > 100;
   bool l2MovOn = PS3.getAnalogButton(L2);
   bool r2MovOn = PS3.getAnalogButton(R2);
+  bool l1MovOn = PS3.getButtonClick(L1);
+  bool r1MovOn = PS3.getButtonClick(R1);
+  bool l3MovOn = PS3.getButtonClick(L3);
+  bool r3MovOn = PS3.getButtonClick(R3);
+  bool l1ToConfirm = joiLeftUp || joiLeftLeft || upButOn || leftButOn;
 
 
   if (ps3StatusOn  || ps3NavOn) {
@@ -95,6 +96,13 @@ void loop() {
     }
     else {
       digitalWrite (5, HIGH);
+    }
+    if (l1MovOn && !l1ToConfirm) {
+      digitalWrite (2, LOW);
+      digitalWrite (4, LOW);
+      delay(5000);
+    } else if (!l1MovOn) {
+      delay(1);
     }
   }
 }
