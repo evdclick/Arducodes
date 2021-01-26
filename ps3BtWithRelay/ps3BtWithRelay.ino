@@ -44,29 +44,34 @@ void loop() {
 
   bool ps3StatusOn = PS3.PS3Connected;
   bool ps3NavOn = PS3.PS3NavigationConnected;
+  bool joisInMov = PS3.getAnalogHat(LeftHatX) > 137 || PS3.getAnalogHat(LeftHatX) < 117 || PS3.getAnalogHat(LeftHatY) > 137 || PS3.getAnalogHat(LeftHatY) < 117 || PS3.getAnalogHat(RightHatX) > 137 || PS3.getAnalogHat(RightHatX) < 117 || PS3.getAnalogHat(RightHatY) > 137 || PS3.getAnalogHat(RightHatY) < 117;
   bool joiLeftUp = PS3.getAnalogHat(LeftHatX) < 30;
   bool joiLeftDown = PS3.getAnalogHat(LeftHatX) > 230;
   bool joiLeftLeft = PS3.getAnalogHat(LeftHatY) < 30;
   bool joiLeftRight = PS3.getAnalogHat(LeftHatY) > 230;
+  bool joiRightUp = PS3.getAnalogHat(RightHatX) < 30;
+  bool joiRightDown = PS3.getAnalogHat(RightHatX) > 230;
+  bool joiRightLeft = PS3.getAnalogHat(RightHatY) < 30;
+  bool joiRightRight = PS3.getAnalogHat(RightHatY) > 230;
 
   if (ps3StatusOn  || ps3NavOn) {
-    if (joiLeftUp) {
+    if (joiLeftUp || joiRightUp ) {
       digitalWrite (4, LOW);
     }
     else {
       digitalWrite (4, HIGH);
     }
-    if (joiLeftDown) {
+    if (joiLeftDown || joiRightDown ) {
       digitalWrite (5, LOW);
     } else {
       digitalWrite (5, HIGH);
     }
-    if (joiLeftLeft) {
+    if (joiLeftLeft || joiRightLeft) {
       digitalWrite(2, LOW);
     } else {
       digitalWrite(2, LOW);
     }
-    if (joiLeftRight) {
+    if (joiLeftRight || joiRightRight) {
       digitalWrite(3, LOW);
     } else {
       digitalWrite(3, HIGH);
@@ -76,7 +81,7 @@ void loop() {
 
 /*
 
-if (PS3.PS3Connected || PS3.PS3NavigationConnected) {
+  if (PS3.PS3Connected || PS3.PS3NavigationConnected) {
   if (PS3.getAnalogHat(LeftHatX) > 137 || PS3.getAnalogHat(LeftHatX) < 117 || PS3.getAnalogHat(LeftHatY) > 137 || PS3.getAnalogHat(LeftHatY) < 117 || PS3.getAnalogHat(RightHatX) > 137 || PS3.getAnalogHat(RightHatX) < 117 || PS3.getAnalogHat(RightHatY) > 137 || PS3.getAnalogHat(RightHatY) < 117) {
     Serial.print(F("\r\nLeftHatX: "));
     Serial.print(PS3.getAnalogHat(LeftHatX));
@@ -215,18 +220,18 @@ if (PS3.PS3Connected || PS3.PS3NavigationConnected) {
   }
 
 
-#if 0 // Set this to 1 in order to see the angle of the controller
+  #if 0 // Set this to 1 in order to see the angle of the controller
   if (printAngle) {
     Serial.print(F("\r\nPitch: "));
     Serial.print(PS3.getAngle(Pitch));
     Serial.print(F("\tRoll: "));
     Serial.print(PS3.getAngle(Roll));
   }
-#endif
-}
+  #endif
+  }
 
-#if 0 // Set this to 1 in order to enable support for the Playstation Move controller
-else if (PS3.PS3MoveConnected) {
+  #if 0 // Set this to 1 in order to enable support for the Playstation Move controller
+  else if (PS3.PS3MoveConnected) {
   if (PS3.getAnalogButton(T)) {
     Serial.print(F("\r\nT: "));
     Serial.print(PS3.getAnalogButton(T));
@@ -277,7 +282,7 @@ else if (PS3.PS3MoveConnected) {
     Serial.print(F("\r\nTemperature: "));
     Serial.print(PS3.getTemperature());
   }
-}
-#endif
-}
+  }
+  #endif
+  }
 */
