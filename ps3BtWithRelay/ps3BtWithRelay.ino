@@ -49,33 +49,48 @@ void loop() {
   bool joiLeftDown = PS3.getAnalogHat(LeftHatX) > 230;
   bool joiLeftLeft = PS3.getAnalogHat(LeftHatY) < 30;
   bool joiLeftRight = PS3.getAnalogHat(LeftHatY) > 230;
-  bool joiRightUp = PS3.getAnalogHat(RightHatX) < 30;
-  bool joiRightDown = PS3.getAnalogHat(RightHatX) > 230;
-  bool joiRightLeft = PS3.getAnalogHat(RightHatY) < 30;
-  bool joiRightRight = PS3.getAnalogHat(RightHatY) > 230;
+  bool joiRightUp = PS3.getAnalogHat(RightHatX) > 230;
+  bool joiRightDown = PS3.getAnalogHat(RightHatX) < 30;
+  bool joiRightLeft = PS3.getAnalogHat(RightHatY) > 230;
+  bool joiRightRight = PS3.getAnalogHat(RightHatY) < 30;
+  bool leftButOn = PS3.getAnalogButton(LEFT) && PS3.getAnalogButton(LEFT) > 100;
+  bool rigtButOn = PS3.getAnalogButton(RIGHT) && PS3.getAnalogButton(RIGHT) > 100;
+  bool upButOn = PS3.getAnalogButton(UP) && PS3.getAnalogButton(UP) > 100;
+  bool downButOn = PS3.getAnalogButton(DOWN) && PS3.getAnalogButton(DOWN) > 100;
+  bool crosButOn = PS3.getAnalogButton(CROSS) &&  PS3.getAnalogButton(CROSS) > 100;
+  bool triaButOn = PS3.getAnalogButton(TRIANGLE) &&  PS3.getAnalogButton(TRIANGLE) > 100;
+  bool circButOn = PS3.getAnalogButton(CIRCLE) &&  PS3.getAnalogButton(CIRCLE) > 100;
+  bool squareButOn = PS3.getAnalogButton(SQUARE) &&  PS3.getAnalogButton(SQUARE) > 100;
+  bool l2MovOn = PS3.getAnalogButton(L2);
+  bool r2MovOn = PS3.getAnalogButton(R2);
+
 
   if (ps3StatusOn  || ps3NavOn) {
     if (joiLeftUp || joiRightUp ) {
       digitalWrite (4, LOW);
+      digitalWrite (2, LOW);
     }
     else {
       digitalWrite (4, HIGH);
+      digitalWrite (2, HIGH);
     }
     if (joiLeftDown || joiRightDown ) {
       digitalWrite (5, LOW);
+      digitalWrite (3, LOW);
     } else {
       digitalWrite (5, HIGH);
+      digitalWrite (3, HIGH);
     }
-    if (joiLeftLeft || joiRightLeft) {
-      digitalWrite(2, LOW);
-    } else {
-      digitalWrite(2, LOW);
-    }
-    if (joiLeftRight || joiRightRight) {
-      digitalWrite(3, LOW);
-    } else {
-      digitalWrite(3, HIGH);
-    }
+    /*   if (joiLeftLeft || joiRightLeft) {
+         digitalWrite(2, LOW);
+       } else {
+         digitalWrite(2, LOW);
+       }
+       if (joiLeftRight || joiRightRight) {
+         digitalWrite(3, LOW);
+       } else {
+         digitalWrite(3, HIGH);
+       }*/
   }
 }
 
