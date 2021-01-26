@@ -17,7 +17,6 @@ PS3BT PS3(&Btd); // This will just create the instance
 
 bool printTemperature, printAngle;
 
-
 void setup() {
   Serial.begin(115200);
 #if !defined(__MIPSEL__)
@@ -29,15 +28,12 @@ void setup() {
   }
   Serial.print(F("\r\nPS3 Bluetooth Library Started"));
 
-  pinMode (2, OUTPUT);
-  pinMode (3, OUTPUT);
-  pinMode (4, OUTPUT);
-  pinMode (5, OUTPUT);
+  //Init digital outputs
+  for (int pinRelay = 2; pinRelay++; pinRelay <= 5) {
+    pinMode (pinRelay, OUTPUT);
+    digitalWrite (pinRelay, HIGH);
+  }
 
-  digitalWrite (2, HIGH);
-  digitalWrite (3, HIGH);
-  digitalWrite (4, HIGH);
-  digitalWrite (5, HIGH);
 }
 void loop() {
   Usb.Task();
@@ -54,7 +50,7 @@ void loop() {
   bool joiRightLeft = PS3.getAnalogHat(RightHatX) < 30;
   bool joiRightRight = PS3.getAnalogHat(RightHatX) > 230;
   bool leftButOn = PS3.getAnalogButton(LEFT) && PS3.getAnalogButton(LEFT) > 100;
-  bool rigtButOn = PS3.getAnalogButton(RIGHT) && PS3.getAnalogButton(RIGHT) > 100;
+  bool rightButOn = PS3.getAnalogButton(RIGHT) && PS3.getAnalogButton(RIGHT) > 100;
   bool upButOn = PS3.getAnalogButton(UP) && PS3.getAnalogButton(UP) > 100;
   bool downButOn = PS3.getAnalogButton(DOWN) && PS3.getAnalogButton(DOWN) > 100;
   bool crosButOn = PS3.getAnalogButton(CROSS) &&  PS3.getAnalogButton(CROSS) > 100;
@@ -66,26 +62,26 @@ void loop() {
 
 
   if (ps3StatusOn  || ps3NavOn) {
-    if (joiLeftUp || joiLeftLeft) {
+    if (joiLeftUp || joiLeftLeft || upButOn || leftButOn) {
       digitalWrite (2, LOW);
     }
     else {
       digitalWrite (2, HIGH);
     }
-    if (joiRightUp || joiRightLeft) {
+    if (joiRightUp || joiRightLeft || downButOn || rightButOn) {
       digitalWrite (4, LOW);
     }
     else {
       digitalWrite (4, HIGH);
     }
 
-    if (joiLeftDown || joiLeftRight) {
+    if (joiLeftDown || joiLeftRight || triaButOn || circButOn) {
       digitalWrite (3, LOW);
     }
     else {
       digitalWrite (3, HIGH);
     }
-    if (joiRightDown || joiRightRight) {
+    if (joiRightDown || joiRightRight || squareButOn || crosButOn) {
       digitalWrite (5, LOW);
     }
     else {
