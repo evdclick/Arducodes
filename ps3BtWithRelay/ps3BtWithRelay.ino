@@ -51,8 +51,8 @@ void loop() {
   bool joiLeftRight = PS3.getAnalogHat(LeftHatX) > 230;
   bool joiRightUp = PS3.getAnalogHat(RightHatY) < 30; //Verificado
   bool joiRightDown = PS3.getAnalogHat(RightHatY) > 230;
-  bool joiRightLeft = PS3.getAnalogHat(RightHatX) > 230;
-  bool joiRightRight = PS3.getAnalogHat(RightHatX) < 30;
+  bool joiRightLeft = PS3.getAnalogHat(RightHatX) < 30;
+  bool joiRightRight = PS3.getAnalogHat(RightHatX) > 230;
   bool leftButOn = PS3.getAnalogButton(LEFT) && PS3.getAnalogButton(LEFT) > 100;
   bool rigtButOn = PS3.getAnalogButton(RIGHT) && PS3.getAnalogButton(RIGHT) > 100;
   bool upButOn = PS3.getAnalogButton(UP) && PS3.getAnalogButton(UP) > 100;
@@ -66,13 +66,13 @@ void loop() {
 
 
   if (ps3StatusOn  || ps3NavOn) {
-    if (joiLeftUp) {
+    if (joiLeftLeft) {
       digitalWrite (2, LOW);
     }
     else {
       digitalWrite (2, HIGH);
     }
-    if (joiRightUp) {
+    if (joiRightLeft) {
       digitalWrite (4, LOW);
     }
     else {
