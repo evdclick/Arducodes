@@ -66,14 +66,20 @@ void loop() {
 
 
   if (ps3StatusOn  || ps3NavOn) {
-    if (joiLeftUp || joiRightUp ) {
-      digitalWrite (4, LOW);
+    if (joiLeftUp) {
       digitalWrite (2, LOW);
     }
     else {
-      digitalWrite (4, HIGH);
       digitalWrite (2, HIGH);
     }
+    if (joiRightUp) {
+      digitalWrite (4, LOW);
+    }
+    else {
+      digitalWrite (4, HIGH);
+    }
+
+ /*   
     if (joiLeftDown || joiRightDown ) {
       digitalWrite (5, LOW);
       digitalWrite (3, LOW);
@@ -81,6 +87,7 @@ void loop() {
       digitalWrite (5, HIGH);
       digitalWrite (3, HIGH);
     }
+    */
     /*   if (joiLeftLeft || joiRightLeft) {
          digitalWrite(2, LOW);
        } else {
