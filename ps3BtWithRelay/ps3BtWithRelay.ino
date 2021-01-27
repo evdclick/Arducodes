@@ -115,12 +115,14 @@ void loop() {
         digitalWrite (4, HIGH);
       }
     }
-    if (l2MovOn && !l2ToConfirm) {
+    if ((l2MovOn || r2MovOn) && !l2ToConfirm) {
       digitalWrite (3, LOW);
       digitalWrite (5, LOW);
-      delay(5000);
+      if (l2MovOn) {
+        delay(5000);
+      }
     } else {
-      if (!l2MovOn && !l2ToConfirm) {
+      if ((!l2MovOn || !r2MovOn) && !l2ToConfirm) {
         digitalWrite (3, HIGH);
         digitalWrite (5, HIGH);
       }
