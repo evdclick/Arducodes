@@ -70,18 +70,6 @@ void loop() {
   bool l2ToConfirm = (joiLeftDown || joiLeftRight || downButOn || rightButOn) || (joiRightDown || joiRightRight || squareButOn || crosButOn);
 
   if (ps3StatusOn  || ps3NavOn) {
-
-
-    if (PS3.getButtonClick(PS)) {
-      Serial.println("Control desconectado");
-      delay(500);
-      PS3.disconnect();
-      delay(500);
-      PS3.disconnect();
-      delay(500);
-      PS3.disconnect();
-      delay(5000);
-    }
     if (joiLeftUp || joiLeftLeft || upButOn || leftButOn) {
       digitalWrite (2, LOW);
     }
@@ -136,6 +124,15 @@ void loop() {
       if ((!l2MovOn || !r2MovOn) && !l2ToConfirm) {
         digitalWrite (3, HIGH);
         digitalWrite (5, HIGH);
+      }
+    }
+
+    if (PS3.getButtonClick(PS)) {
+      bool set1 = true;
+      while (set1) {
+        Serial.println("Control desconectado");
+        delay(100);
+        PS3.disconnect();
       }
     }
   }
