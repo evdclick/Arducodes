@@ -62,17 +62,17 @@ void loop() {
   bool triaButOn = PS3.getAnalogButton(TRIANGLE) &&  PS3.getAnalogButton(TRIANGLE) > 100;
   bool circButOn = PS3.getAnalogButton(CIRCLE) &&  PS3.getAnalogButton(CIRCLE) > 100;
   bool squareButOn = PS3.getAnalogButton(SQUARE) &&  PS3.getAnalogButton(SQUARE) > 100;
-  bool l2MovOn = PS3.getAnalogButton(L2);
-  bool r2MovOn = PS3.getAnalogButton(R2);
-  bool l1MovOn = PS3.getButtonPress(L1);
-  bool r1MovOn = PS3.getButtonPress(R1);
-  bool l3MovOn = PS3.getButtonPress(L3);
-  bool r3MovOn = PS3.getButtonPress(R3);
+  bool l2MovOn = PS3.getAnalogButton(L2) > 100;
+  bool r2MovOn = PS3.getAnalogButton(R2) > 100;
+  bool l1MovOn = PS3.getAnalogButton(L1) > 100;
+  bool r1MovOn = PS3.getAnalogButton(R1) > 100;
+  bool l3MovOn = PS3.getAnalogButton(L3) > 100;
+  bool r3MovOn = PS3.getAnalogButton(R3) > 100;
   bool l1ToConfirm = joiLeftUp || joiLeftLeft || upButOn || leftButOn;
 
-  Serial.print("Valor de L1 es: ");
-  Serial.println(l1MovOn);
-  delay(1000);
+  //Serial.print("Valor de L1 es: ");
+  // Serial.println(l1MovOn);
+  // delay(1000);
 
   if (ps3StatusOn  || ps3NavOn) {
     if (joiLeftUp || joiLeftLeft || upButOn || leftButOn) {
@@ -105,10 +105,10 @@ void loop() {
       digitalWrite (4, LOW);
       delay(5000);
     } else {
-      //      if (!l1MovOn && !l1ToConfirm) {
-      //        digitalWrite (2, HIGH);
-      //        digitalWrite (4, HIGH);
-      //      }
+      if (!l1MovOn && !l1ToConfirm) {
+        digitalWrite (2, HIGH);
+        digitalWrite (4, HIGH);
+      }
     }
   }
 }
