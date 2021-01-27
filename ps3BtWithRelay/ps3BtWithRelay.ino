@@ -45,7 +45,7 @@ void loop() {
   bool ps3StatusOn = PS3.PS3Connected;
   bool ps3NavOn = PS3.PS3NavigationConnected;
   bool joisInMov = PS3.getAnalogHat(LeftHatX) > 137 || PS3.getAnalogHat(LeftHatX) < 117 || PS3.getAnalogHat(LeftHatY) > 137 || PS3.getAnalogHat(LeftHatY) < 117 || PS3.getAnalogHat(RightHatX) > 137 || PS3.getAnalogHat(RightHatX) < 117 || PS3.getAnalogHat(RightHatY) > 137 || PS3.getAnalogHat(RightHatY) < 117;
-  bool joiLeftUp = PS3.getAnalogHat(LeftHatY) < 30; 
+  bool joiLeftUp = PS3.getAnalogHat(LeftHatY) < 30;
   bool joiLeftDown = PS3.getAnalogHat(LeftHatY) > 230;
   bool joiLeftLeft = PS3.getAnalogHat(LeftHatX) < 30;
   bool joiLeftRight = PS3.getAnalogHat(LeftHatX) > 230;
@@ -103,17 +103,18 @@ void loop() {
         digitalWrite (5, HIGH);
       }
     }
-    if (l1MovOn && !l1ToConfirm) {
+    if ((l1MovOn || r1MovOn) && !l1ToConfirm) {
       digitalWrite (2, LOW);
       digitalWrite (4, LOW);
-      delay(5000);
+      if (l1MovOn) {
+        delay(5000);
+      }
     } else {
-      if (!l1MovOn && !l1ToConfirm) {
+      if ((!l1MovOn || !r1MovOn) && !l1ToConfirm) {
         digitalWrite (2, HIGH);
         digitalWrite (4, HIGH);
       }
     }
-
     if (l2MovOn && !l2ToConfirm) {
       digitalWrite (3, LOW);
       digitalWrite (5, LOW);
