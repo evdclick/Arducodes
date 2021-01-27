@@ -43,15 +43,15 @@ void loop() {
   Usb.Task();
   bool ps3StatusOn = PS3.PS3Connected;
   bool ps3NavOn = PS3.PS3NavigationConnected;
-  bool joisInMov = PS3.getAnalogHat(LeftHatX) > 137 || PS3.getAnalogHat(LeftHatX) < 117 || PS3.getAnalogHat(LeftHatY) > 137 || PS3.getAnalogHat(LeftHatY) < 117 || PS3.getAnalogHat(RightHatX) > 137 || PS3.getAnalogHat(RightHatX) < 117 || PS3.getAnalogHat(RightHatY) > 137 || PS3.getAnalogHat(RightHatY) < 117;
-  bool joiLeftUp = PS3.getAnalogHat(LeftHatY) < 30;
-  bool joiLeftDown = PS3.getAnalogHat(LeftHatY) > 230;
-  bool joiLeftLeft = PS3.getAnalogHat(LeftHatX) < 30;
-  bool joiLeftRight = PS3.getAnalogHat(LeftHatX) > 230;
-  bool joiRightUp = PS3.getAnalogHat(RightHatY) < 30;
-  bool joiRightDown = PS3.getAnalogHat(RightHatY) > 230;
-  bool joiRightLeft = PS3.getAnalogHat(RightHatX) < 30;
-  bool joiRightRight = PS3.getAnalogHat(RightHatX) > 230;
+  bool joysInMov = PS3.getAnalogHat(LeftHatX) > 137 || PS3.getAnalogHat(LeftHatX) < 117 || PS3.getAnalogHat(LeftHatY) > 137 || PS3.getAnalogHat(LeftHatY) < 117 || PS3.getAnalogHat(RightHatX) > 137 || PS3.getAnalogHat(RightHatX) < 117 || PS3.getAnalogHat(RightHatY) > 137 || PS3.getAnalogHat(RightHatY) < 117;
+  bool joyLeftUp = PS3.getAnalogHat(LeftHatY) < 30;
+  bool joyLeftDown = PS3.getAnalogHat(LeftHatY) > 230;
+  bool joyLeftLeft = PS3.getAnalogHat(LeftHatX) < 30;
+  bool joyLeftRight = PS3.getAnalogHat(LeftHatX) > 230;
+  bool joyRightUp = PS3.getAnalogHat(RightHatY) < 30;
+  bool joyRightDown = PS3.getAnalogHat(RightHatY) > 230;
+  bool joyRightLeft = PS3.getAnalogHat(RightHatX) < 30;
+  bool joyRightRight = PS3.getAnalogHat(RightHatX) > 230;
   bool leftButOn = PS3.getAnalogButton(LEFT) > 100;
   bool rightButOn = PS3.getAnalogButton(RIGHT) > 100;
   bool upButOn = PS3.getAnalogButton(UP) > 100;
@@ -66,11 +66,11 @@ void loop() {
   bool r1MovOn = PS3.getAnalogButton(R1) > 100;
   bool l3MovOn = PS3.getAnalogButton(L3) > 100;
   bool r3MovOn = PS3.getAnalogButton(R3) > 100;
-  bool l1ToConfirm = (joiLeftUp || joiLeftLeft || upButOn || leftButOn) || (joiRightUp || joiRightLeft || circButOn || triaButOn );
-  bool l2ToConfirm = (joiLeftDown || joiLeftRight || downButOn || rightButOn) || (joiRightDown || joiRightRight || squareButOn || crosButOn);
+  bool l1ToConfirm = (joyLeftUp || joyLeftLeft || upButOn || leftButOn) || (joyRightUp || joyRightLeft || circButOn || triaButOn );
+  bool l2ToConfirm = (joyLeftDown || joyLeftRight || downButOn || rightButOn) || (joyRightDown || joyRightRight || squareButOn || crosButOn);
 
   if (ps3StatusOn  || ps3NavOn) {
-    if (joiLeftUp || joiLeftLeft || upButOn || leftButOn) {
+    if (joyLeftUp || joyLeftLeft || upButOn || leftButOn) {
       digitalWrite (2, LOW);
     }
     else {
@@ -78,7 +78,7 @@ void loop() {
         digitalWrite (2, HIGH);
       }
     }
-    if (joiRightUp || joiRightLeft || circButOn || triaButOn ) {
+    if (joyRightUp || joyRightLeft || circButOn || triaButOn ) {
       digitalWrite (4, LOW);
     }
     else {
@@ -86,7 +86,7 @@ void loop() {
         digitalWrite (4, HIGH);
       }
     }
-    if (joiLeftDown || joiLeftRight || downButOn || rightButOn) {
+    if (joyLeftDown || joyLeftRight || downButOn || rightButOn) {
       digitalWrite (3, LOW);
     }
     else {
@@ -94,7 +94,7 @@ void loop() {
         digitalWrite (3, HIGH);
       }
     }
-    if (joiRightDown || joiRightRight || squareButOn || crosButOn) {
+    if (joyRightDown || joyRightRight || squareButOn || crosButOn) {
       digitalWrite (5, LOW);
     }
     else {
@@ -126,23 +126,6 @@ void loop() {
         digitalWrite (5, HIGH);
       }
     }
-
-
-
-    if (PS3.PS3Connected || PS3.PS3NavigationConnected)
-    {
-      if (PS3.getButtonPress(PS)) {
-        bool set1 = true;
-        while (set1) {
-          Serial.println("Control desconectado");
-          delay(100);
-          PS3.disconnect();
-        }
-      }
-
-
-    }
-
   }
 }
 
