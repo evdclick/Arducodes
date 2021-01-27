@@ -87,22 +87,17 @@ void loop() {
         digitalWrite (4, HIGH);
       }
     }
-
     if (joiLeftDown || joiLeftRight || triaButOn || circButOn) {
       digitalWrite (3, LOW);
     }
     else {
-      if (!!l1MovOn) {
-        digitalWrite (3, HIGH);
-      }
+      digitalWrite (3, HIGH);
     }
     if (joiRightDown || joiRightRight || squareButOn || crosButOn) {
       digitalWrite (5, LOW);
     }
     else {
-      if (!!l1MovOn) {
-        digitalWrite (5, HIGH);
-      }
+      digitalWrite (5, HIGH);
     }
     if (l1MovOn && !l1ToConfirm) {
       digitalWrite (2, LOW);
