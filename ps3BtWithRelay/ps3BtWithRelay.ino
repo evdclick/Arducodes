@@ -41,7 +41,10 @@ void setup() {
 }
 void loop() {
   Usb.Task();
-
+  if (PS3.getButtonClick(PS)) {
+    Serial.println("Control desconectado");
+    PS3.disconnect();
+  }
   bool ps3StatusOn = PS3.PS3Connected;
   bool ps3NavOn = PS3.PS3NavigationConnected;
   bool joisInMov = PS3.getAnalogHat(LeftHatX) > 137 || PS3.getAnalogHat(LeftHatX) < 117 || PS3.getAnalogHat(LeftHatY) > 137 || PS3.getAnalogHat(LeftHatY) < 117 || PS3.getAnalogHat(RightHatX) > 137 || PS3.getAnalogHat(RightHatX) < 117 || PS3.getAnalogHat(RightHatY) > 137 || PS3.getAnalogHat(RightHatY) < 117;
