@@ -101,9 +101,6 @@ void loop() {
       digitalWrite (2, LOW);
       digitalWrite (4, LOW);
       delay(5000);
-    } else {
-      digitalWrite (2, HIGH);
-      digitalWrite (4, HIGH);
     }
   }
 }
