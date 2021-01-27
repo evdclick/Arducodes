@@ -70,7 +70,9 @@ void loop() {
   bool r3MovOn = PS3.getButtonClick(R3);
   bool l1ToConfirm = joiLeftUp || joiLeftLeft || upButOn || leftButOn;
 
+  Serial.print(PS3.getButtonClick(L1));
 
+/*
   if (ps3StatusOn  || ps3NavOn) {
     if (joiLeftUp || joiLeftLeft || upButOn || leftButOn) {
       digitalWrite (2, LOW);
@@ -104,6 +106,12 @@ void loop() {
     }
   }
 }
+
+*/
+
+
+
+
 
 /*
 
