@@ -69,6 +69,7 @@ void loop() {
   bool l1ToConfirm = (joyLeftUp || joyLeftLeft || upButOn || leftButOn) || (joyRightUp || joyRightLeft || circButOn || triaButOn );
   bool l2ToConfirm = (joyLeftDown || joyLeftRight || downButOn || rightButOn) || (joyRightDown || joyRightRight || squareButOn || crosButOn);
 
+
   if (ps3StatusOn  || ps3NavOn) {
     if (joyLeftUp || joyLeftLeft || upButOn || leftButOn) {
       digitalWrite (2, LOW);
@@ -126,6 +127,12 @@ void loop() {
         digitalWrite (5, HIGH);
       }
     }
+
+    if (l2MovOn && r2MovOn) {
+      Serial.println("PS Equivalent detected");
+      PS3.disconnect();
+    }
+
   }
 }
 
