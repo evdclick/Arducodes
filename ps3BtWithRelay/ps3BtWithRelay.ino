@@ -71,14 +71,17 @@ void loop() {
 
   if (ps3StatusOn  || ps3NavOn) {
 
-    if (PS3.getAnalogButton(PS)) {
+
+    if (PS3.getButtonClick(PS)) {
       Serial.println("Control desconectado");
+      delay(500);
+      PS3.disconnect();
+      delay(500);
+      PS3.disconnect();
       delay(500);
       PS3.disconnect();
       delay(5000);
     }
-
-
     if (joiLeftUp || joiLeftLeft || upButOn || leftButOn) {
       digitalWrite (2, LOW);
     }
