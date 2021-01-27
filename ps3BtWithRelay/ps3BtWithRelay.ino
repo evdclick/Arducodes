@@ -64,15 +64,15 @@ void loop() {
   bool squareButOn = PS3.getAnalogButton(SQUARE) &&  PS3.getAnalogButton(SQUARE) > 100;
   bool l2MovOn = PS3.getAnalogButton(L2);
   bool r2MovOn = PS3.getAnalogButton(R2);
-  bool l1MovOn = PS3.getButtonClick(L1);
-  bool r1MovOn = PS3.getButtonClick(R1);
-  bool l3MovOn = PS3.getButtonClick(L3);
-  bool r3MovOn = PS3.getButtonClick(R3);
+  bool l1MovOn = PS3.getButtonPress(L1);
+  bool r1MovOn = PS3.getButtonPress(R1);
+  bool l3MovOn = PS3.getButtonPress(L3);
+  bool r3MovOn = PS3.getButtonPress(R3);
   bool l1ToConfirm = joiLeftUp || joiLeftLeft || upButOn || leftButOn;
 
-  Serial.print(PS3.getButtonClick(L1));
 
-/*
+
+
   if (ps3StatusOn  || ps3NavOn) {
     if (joiLeftUp || joiLeftLeft || upButOn || leftButOn) {
       digitalWrite (2, LOW);
@@ -103,11 +103,16 @@ void loop() {
       digitalWrite (2, LOW);
       digitalWrite (4, LOW);
       delay(5000);
+    } else {
+      if (!l1MovOn && !l1ToConfirm) {
+        digitalWrite (2, HIGH);
+        digitalWrite (4, HIGH);
+      }
     }
   }
 }
 
-*/
+
 
 
 
