@@ -70,22 +70,22 @@ void loop() {
   bool r3MovOn = PS3.getAnalogButton(R3) > 100;
   bool l1ToConfirm = joiLeftUp || joiLeftLeft || upButOn || leftButOn;
 
-  //Serial.print("Valor de L1 es: ");
-  // Serial.println(l1MovOn);
-  // delay(1000);
-
   if (ps3StatusOn  || ps3NavOn) {
     if (joiLeftUp || joiLeftLeft || upButOn || leftButOn) {
       digitalWrite (2, LOW);
     }
     else {
-      digitalWrite (2, HIGH);
+      if (!!l1MovOn) {
+        digitalWrite (2, HIGH);
+      }
     }
     if (joiRightUp || joiRightLeft || downButOn || rightButOn) {
       digitalWrite (4, LOW);
     }
     else {
-      digitalWrite (4, HIGH);
+      if (!!l1MovOn) {
+        digitalWrite (4, HIGH);
+      }
     }
 
     if (joiLeftDown || joiLeftRight || triaButOn || circButOn) {
