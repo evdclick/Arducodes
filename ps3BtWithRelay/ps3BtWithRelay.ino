@@ -70,8 +70,9 @@ void loop() {
   bool r3MovOn = PS3.getButtonPress(R3);
   bool l1ToConfirm = joiLeftUp || joiLeftLeft || upButOn || leftButOn;
 
-
-
+  Serial.print("Valor de L1 es: ");
+  Serial.println(l1MovOn);
+  delay(1000);
 
   if (ps3StatusOn  || ps3NavOn) {
     if (joiLeftUp || joiLeftLeft || upButOn || leftButOn) {
@@ -104,10 +105,10 @@ void loop() {
       digitalWrite (4, LOW);
       delay(5000);
     } else {
-      if (!l1MovOn && !l1ToConfirm) {
-        digitalWrite (2, HIGH);
-        digitalWrite (4, HIGH);
-      }
+      //      if (!l1MovOn && !l1ToConfirm) {
+      //        digitalWrite (2, HIGH);
+      //        digitalWrite (4, HIGH);
+      //      }
     }
   }
 }
