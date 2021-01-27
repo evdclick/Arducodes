@@ -75,13 +75,13 @@ void loop() {
     if (joiLeftUp || joiLeftLeft || upButOn || leftButOn) {
       digitalWrite (2, LOW);
     }
-    else if (!l1MovOn) {
+    else {
       digitalWrite (2, HIGH);
     }
     if (joiRightUp || joiRightLeft || downButOn || rightButOn) {
       digitalWrite (4, LOW);
     }
-    else if (!l1MovOn) {
+    else {
       digitalWrite (4, HIGH);
     }
 
@@ -97,15 +97,13 @@ void loop() {
     else {
       digitalWrite (5, HIGH);
     }
-    if (l1MovOn) {
+    if (l1MovOn && !l1ToConfirm) {
       digitalWrite (2, LOW);
       digitalWrite (4, LOW);
       delay(5000);
-    } else if (!l1MovOn && !l1ToConfirm) {
+    } else {
       digitalWrite (2, HIGH);
       digitalWrite (4, HIGH);
-
-      delay(1);
     }
   }
 }
