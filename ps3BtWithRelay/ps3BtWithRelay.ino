@@ -130,6 +130,8 @@ void loop() {
 
     if (l2MovOn && r2MovOn) {
       Serial.println("PS Equivalent detected");
+      l1ToConfirm = false;
+      l2ToConfirm = false;
       PS3.disconnect();
     }
 
