@@ -127,14 +127,22 @@ void loop() {
       }
     }
 
-    if (PS3.getButtonClick(PS)) {
-      bool set1 = true;
-      while (set1) {
-        Serial.println("Control desconectado");
-        delay(100);
-        PS3.disconnect();
+
+
+    if (PS3.PS3Connected || PS3.PS3NavigationConnected)
+    {
+      if (PS3.getButtonPress(PS)) {
+        bool set1 = true;
+        while (set1) {
+          Serial.println("Control desconectado");
+          delay(100);
+          PS3.disconnect();
+        }
       }
+
+
     }
+
   }
 }
 
