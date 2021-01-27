@@ -68,7 +68,7 @@ void loop() {
   bool r1MovOn = PS3.getAnalogButton(R1) > 100;
   bool l3MovOn = PS3.getAnalogButton(L3) > 100;
   bool r3MovOn = PS3.getAnalogButton(R3) > 100;
-  bool l1ToConfirm = joiLeftUp || joiLeftLeft || upButOn || leftButOn;
+  bool l1ToConfirm = (joiLeftUp || joiLeftLeft || upButOn || leftButOn) || (joiRightUp || joiRightLeft || downButOn || rightButOn) ;
 
   if (ps3StatusOn  || ps3NavOn) {
     if (joiLeftUp || joiLeftLeft || upButOn || leftButOn) {
