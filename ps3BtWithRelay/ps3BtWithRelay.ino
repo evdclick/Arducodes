@@ -92,13 +92,17 @@ void loop() {
       digitalWrite (3, LOW);
     }
     else {
-      digitalWrite (3, HIGH);
+      if (!!l1MovOn) {
+        digitalWrite (3, HIGH);
+      }
     }
     if (joiRightDown || joiRightRight || squareButOn || crosButOn) {
       digitalWrite (5, LOW);
     }
     else {
-      digitalWrite (5, HIGH);
+      if (!!l1MovOn) {
+        digitalWrite (5, HIGH);
+      }
     }
     if (l1MovOn && !l1ToConfirm) {
       digitalWrite (2, LOW);
