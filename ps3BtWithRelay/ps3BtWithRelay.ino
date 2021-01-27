@@ -68,7 +68,7 @@ void loop() {
   bool r1MovOn = PS3.getAnalogButton(R1) > 100;
   bool l3MovOn = PS3.getAnalogButton(L3) > 100;
   bool r3MovOn = PS3.getAnalogButton(R3) > 100;
-  bool l1ToConfirm = (joiLeftUp || joiLeftLeft || upButOn || leftButOn) || (joiRightUp || joiRightLeft || downButOn || rightButOn) ;
+  bool l1ToConfirm = (joiLeftUp || joiLeftLeft || upButOn || leftButOn) || (joiRightUp || joiRightLeft || circButOn || triaButOn );
 
   if (ps3StatusOn  || ps3NavOn) {
     if (joiLeftUp || joiLeftLeft || upButOn || leftButOn) {
@@ -79,7 +79,7 @@ void loop() {
         digitalWrite (2, HIGH);
       }
     }
-    if (joiRightUp || joiRightLeft || downButOn || rightButOn) {
+    if (joiRightUp || joiRightLeft || circButOn || triaButOn ) {
       digitalWrite (4, LOW);
     }
     else {
@@ -87,7 +87,7 @@ void loop() {
         digitalWrite (4, HIGH);
       }
     }
-    if (joiLeftDown || joiLeftRight || triaButOn || circButOn) {
+    if (joiLeftDown || joiLeftRight || downButOn || rightButOn) {
       digitalWrite (3, LOW);
     }
     else {
