@@ -37,10 +37,9 @@ void setup() {
   digitalWrite (4, HIGH);
   pinMode (5, OUTPUT);
   digitalWrite (5, HIGH);
-
+  Usb.Task();
 }
 void loop() {
-  Usb.Task();
   bool ps3StatusOn = PS3.PS3Connected;
   bool ps3NavOn = PS3.PS3NavigationConnected;
   bool joysInMov = PS3.getAnalogHat(LeftHatX) > 137 || PS3.getAnalogHat(LeftHatX) < 117 || PS3.getAnalogHat(LeftHatY) > 137 || PS3.getAnalogHat(LeftHatY) < 117 || PS3.getAnalogHat(RightHatX) > 137 || PS3.getAnalogHat(RightHatX) < 117 || PS3.getAnalogHat(RightHatY) > 137 || PS3.getAnalogHat(RightHatY) < 117;
