@@ -16,6 +16,7 @@ PS3BT PS3(&Btd); // This will just create the instance
 //PS3BT PS3(&Btd, 0x00, 0x15, 0x83, 0x3D, 0x0A, 0x57); // This will also store the bluetooth address - this can be obtained from the dongle when running the sketch
 
 bool printTemperature, printAngle;
+bool goInLoop = false;
 
 void setup() {
   Serial.begin(115200);
@@ -41,6 +42,7 @@ void setup() {
 }
 void loop() {
   Usb.Task();
+
   bool ps3StatusOn = PS3.PS3Connected;
   bool ps3NavOn = PS3.PS3NavigationConnected;
   bool joysInMov = PS3.getAnalogHat(LeftHatX) > 137 || PS3.getAnalogHat(LeftHatX) < 117 || PS3.getAnalogHat(LeftHatY) > 137 || PS3.getAnalogHat(LeftHatY) < 117 || PS3.getAnalogHat(RightHatX) > 137 || PS3.getAnalogHat(RightHatX) < 117 || PS3.getAnalogHat(RightHatY) > 137 || PS3.getAnalogHat(RightHatY) < 117;
@@ -68,6 +70,24 @@ void loop() {
   bool r3MovOn = PS3.getAnalogButton(R3) > 100;
   bool l1ToConfirm = (joyLeftUp || joyLeftLeft || upButOn || leftButOn) || (joyRightUp || joyRightLeft || circButOn || triaButOn );
   bool l2ToConfirm = (joyLeftDown || joyLeftRight || downButOn || rightButOn) || (joyRightDown || joyRightRight || squareButOn || crosButOn);
+
+
+  if (l2MovOn && r2MovOn) {
+    Serial.println("PS Equivalent detected");
+    l1ToConfirm = false;
+    l2ToConfirm = false;
+    PS3.disconnect();
+    goInLoop = true;
+  }
+
+  while (goInLoop) {
+    delay(500);
+    digitalWrite (2, HIGH);
+    digitalWrite (3, HIGH);
+    digitalWrite (4, HIGH);
+    digitalWrite (5, HIGH);
+  }
+
 
 
   if (ps3StatusOn  || ps3NavOn) {
@@ -128,20 +148,7 @@ void loop() {
       }
     }
 
-    if (l2MovOn && r2MovOn) {
-      Serial.println("PS Equivalent detected");
-      l1ToConfirm = false;
-      l2ToConfirm = false;
-      PS3.disconnect();
-      bool goInLoop = true;
-      while (goInLoop) {
-        delay(500);
-              digitalWrite (2, HIGH);
-              digitalWrite (3, HIGH);
-              digitalWrite (4, HIGH);
-              digitalWrite (5, HIGH);
-      }
-    }
+
   }
 }
 
