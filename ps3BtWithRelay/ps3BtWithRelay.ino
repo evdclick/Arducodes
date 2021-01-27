@@ -70,10 +70,15 @@ void loop() {
   bool l2ToConfirm = (joiLeftDown || joiLeftRight || downButOn || rightButOn) || (joiRightDown || joiRightRight || squareButOn || crosButOn);
 
   if (ps3StatusOn  || ps3NavOn) {
-    if (PS3.getButtonClick(PS)) {
+
+    if (PS3.getAnalogButton(PS)) {
       Serial.println("Control desconectado");
+      delay(500);
       PS3.disconnect();
+      delay(5000);
     }
+
+
     if (joiLeftUp || joiLeftLeft || upButOn || leftButOn) {
       digitalWrite (2, LOW);
     }
