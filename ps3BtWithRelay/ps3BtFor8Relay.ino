@@ -90,7 +90,7 @@ void loop() {
       digitalWrite (2, LOW);
     }
     else {
-      if (!l1MovOn) {
+      if (!l1MovOn && !r1MovOn) {
         digitalWrite (2, HIGH);
       }
     }
@@ -98,7 +98,7 @@ void loop() {
       digitalWrite (4, LOW);
     }
     else {
-      if (!l1MovOn) {
+      if (!l1MovOn && !r1MovOn) {
         digitalWrite (4, HIGH);
       }
     }
