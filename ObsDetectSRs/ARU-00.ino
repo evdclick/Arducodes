@@ -1,4 +1,4 @@
-//Tabla de equivalencias byte array processing
+//Tabla de equivalencias byte array processing...
 /*arrayToPcsing[0] = relayStopSignalDcs;
   arrayToPcsing[1] = relayAcusticAlarm
   arrayToPcsing[2] = relayTemporaryBypass
