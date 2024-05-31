@@ -15,9 +15,9 @@ https://www.arduino.cc/en/Tutorial/BuiltInExamples/BlinkWithoutDelay
 //Borneras de entradas digitales
 const int eStop = 26;           //Parada de emergencia
 const int valvStrClosed = 27;   //Final de carrera válvula estribor cerrada
-const int valvStrOpened = 28;   //Final de carrera válvula estribor abierta
+const int valvStrOpen = 28;     //Final de carrera válvula estribor abierta
 const int valvPrtClosed = 29;   //Final de carrera válvula babor cerrada
-const int valvPrtOpened = 30;   //Final de carrera válvula babor abierta
+const int valvPrtOpen = 30;     //Final de carrera válvula babor abierta
 const int pumpReset = 31;       //Pulsador para reset de falla de bomba suministro
 const int commandOpenStr = 32;  //Comando de apertura válvula estribor
 const int commandOpenPrt = 33;  //Comando de apertura válvula babor
@@ -32,9 +32,9 @@ const int giro2ValvPrt = 38;      //Comando giro de cierre válvula babor
 const int pwmValvPrt = 46;        //Señal PWM motorreductor válvula babor
 const int permPump = 39;          //Permisivo para energizar bomba suministro
 const int eStopInd = 40;          //Indicador de parada de emergencia activa
-const int valvStrOpenedInd = 41;  //Indicador LED de válvula estribor abierta
+const int valvStrOpenInd = 41;    //Indicador LED de válvula estribor abierta
 const int valvStrClosedInd = 42;  //Indicador LED de válvula estribor cerrada
-const int valvPrtOpenedInd = 43;  //Indicador LED de válvula babor abierta
+const int valvPrtOpenInd = 43;    //Indicador LED de válvula babor abierta
 const int valvPrtClosedInd = 45;  //Indicador LED de válvula babor cerrada
 const int pumpFaultRst = 47;      //Reset de falla bomba suministro
 
@@ -43,21 +43,13 @@ bool ledState = LOW;               // Para variar el estado del LED
 unsigned long previousMillis = 0;  // Guardar registro de tiempo de la última vez del LED
 const long interval = 500;         // Intervalo para parpadeos (milliseconds)
 
-//Variables para lectura de señales digitales
-bool rstRequest = HIGH;
-bool eStopRequest = HIGH;
-bool readerCmdValvStr = HIGH;
-bool readerCmdValvPrt = HIGH;
-bool limitSwitchOpened = HIGH;
-bool condParaAbrirValvEstribor = LOW;
-
 void setup() {
   //Asignando entradas digitales
   pinMode(eStop, INPUT);           //Parada de emergencia
   pinMode(valvStrClosed, INPUT);   //Final de carrera válvula estribor cerrada
-  pinMode(valvStrOpened, INPUT);   //Final de carrera válvula estribor abierta
+  pinMode(valvStrOpen, INPUT);     //Final de carrera válvula estribor abierta
   pinMode(valvPrtClosed, INPUT);   //Final de carrera válvula babor cerrada
-  pinMode(valvPrtOpened, INPUT);   //Final de carrera válvula babor abierta
+  pinMode(valvPrtOpen, INPUT);     //Final de carrera válvula babor abierta
   pinMode(pumpReset, INPUT);       //Pulsador para reset de falla de bomba suministro
   pinMode(commandOpenStr, INPUT);  //Comando de apertura válvula estribor
   pinMode(commandOpenPrt, INPUT);  //Comando de apertura válvula babor
@@ -80,12 +72,12 @@ void setup() {
   digitalWrite(permPump, LOW);           //Forzar apagado de permisivo de la bomba de suministro
   pinMode(eStopInd, OUTPUT);             //Indicador de parada de emergencia activa
   digitalWrite(eStopInd, HIGH);          //Forzar indicador de paradad de emergencia
-  pinMode(valvStrOpenedInd, OUTPUT);     //Indicador LED de válvula estribor abierta
-  digitalWrite(valvStrOpenedInd, HIGH);  //Forzar indicador de valvula estribor abierta
+  pinMode(valvStrOpenInd, OUTPUT);       //Indicador LED de válvula estribor abierta
+  digitalWrite(valvStrOpenInd, HIGH);    //Forzar indicador de valvula estribor abierta
   pinMode(valvStrClosedInd, OUTPUT);     //Indicador LED de válvula estribor cerrada
   digitalWrite(valvStrClosedInd, HIGH);  //Forzar indicador de valvula estribor cerrada
-  pinMode(valvPrtOpenedInd, OUTPUT);     //Indicador LED de válvula babor abierta
-  digitalWrite(valvPrtOpenedInd, HIGH);  //Forzar indicador de valvula babor abierta
+  pinMode(valvPrtOpenInd, OUTPUT);       //Indicador LED de válvula babor abierta
+  digitalWrite(valvPrtOpenInd, HIGH);    //Forzar indicador de valvula babor abierta
   pinMode(valvPrtClosedInd, OUTPUT);     //Indicador LED de válvula babor cerrada
   digitalWrite(valvPrtClosedInd, HIGH);  //Forzar indicador de valvula babor cerrada
   pinMode(pumpFaultRst, OUTPUT);         //Reset de falla bomba suministro
@@ -102,10 +94,20 @@ void loop() {
     // save the last time you blinked the LED
     previousMillis = currentMillis;
 
-    //Sección para identificar parada de emergencia
-    rstRequest = digitalRead(pumpReset);
-    eStopRequest = digitalRead(eStop);
-    if (rstRequest == LOW && eStopRequest == HIGH) {
+    //Sección para leer entradas digitales y asignar a variables para preprocesamiento
+    bool readerCmdValvStr = digitalRead(commandOpenStr);  //Leer comando de apertura válvula estribor
+    bool readerCmdValvPrt = digitalRead(commandOpenPrt);  //Leer comando de apertura válvula babor
+    bool limitSwitchStrOpen = digitalRead(valvStrOpen);   //Leer final de carrera válvula estribor abierta
+    bool rstRequest = digitalRead(pumpReset);             //Leer final de carrera válvula babor abierta
+    bool eStopRequest = digitalRead(eStop);               //Leer estado del botón de parada de emergencia
+
+    //Sección de condicionales establecidas para que los dispositivos instalados operen
+    bool condParaAbrirValvEstribor = readerCmdValvStr == LOW && readerCmdValvPrt == HIGH && eStopRequest == LOW && limitSwitchStrOpen == HIGH;
+    bool condicionalParaReset = rstRequest == LOW && eStopRequest == HIGH;
+
+
+    //Sección para identificar solicitud de reset parada de emergencia
+    if (condicionalParaReset) {
       digitalWrite(pumpFaultRst, LOW);  //Identificando solicitud de RESET
       delay(5000);
       digitalWrite(pumpFaultRst, HIGH);
@@ -114,15 +116,12 @@ void loop() {
     }
 
     //Sección para identificar comando de apertura válvula estribor
-    readerCmdValvStr = digitalRead(commandOpenStr);
-    readerCmdValvPrt = digitalRead(commandOpenPrt);
-    limitSwitchOpened = digitalRead(valvStrOpened);
-    condParaAbrirValvEstribor = readerCmdValvStr == LOW && readerCmdValvPrt == HIGH && eStopRequest == LOW && limitSwitchOpened == HIGH;
     if (condParaAbrirValvEstribor) {
-      while (limitSwitchOpened == HIGH) {
-        limitSwitchOpened = digitalRead(valvStrOpened);
+      while (limitSwitchStrOpen == HIGH) {
+        limitSwitchStrOpen = digitalRead(valvStrOpen);
         digitalWrite(giro1ValvStr, HIGH);
         digitalWrite(giro2ValvStr, LOW);
+        analogWrite(pwmValvStr, 180); //Ajustar PWN al 80% aprox para proceder con la apertura de la válvula motorizada
       }
     }
 
