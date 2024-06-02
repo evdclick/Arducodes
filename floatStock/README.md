@@ -1,6 +1,8 @@
 DESCRIPCIÓN DEL PROYECTO
 
-Se define bajo la propuesta de centralizar, procesar e indicar las señales necesarias para la operación de las válvulas motorizadas de cargue/despacho en la barcaza. A continuación la lista de señales y los pines asignados en Arduino y bornera
+Se define bajo la propuesta de centralizar, procesar e indicar las señales necesarias para la operación de las válvulas
+motorizadas de cargue/despacho en la barcaza. A continuación la lista de señales y los pines asignados en Arduino y
+bornera
 
 SEÑAL                                        PIN ARDUINO    PIN BORNERA        TIPO        CODE NAME
 Parada de emergencia                              26            1              ENTRADA      eStop
