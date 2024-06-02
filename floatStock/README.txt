@@ -6,11 +6,8 @@ bornera
 
 SEÑAL                                        PIN ARDUINO    PIN BORNERA        TIPO        CODE NAME
 Parada de emergencia                              26            1              ENTRADA      eStop
-
 Final de carrera válvula estribor cerrada         27            2              ENTRADA      valvStrClosed
-
 Final de carrera válvula estribor abierta         28            3              ENTRADA      valvStrOpen
-
 Final de carrera válvula babor cerrada            29            4              ENTRADA      valvPrtClosed
 Final de carrera válvula babor abierta            30            5              ENTRADA      valvPrtOpen
 Pulsador para reset de falla de bomba suministro  31            6              ENTRADA      pumpReset
