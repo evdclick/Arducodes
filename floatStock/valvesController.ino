@@ -2,7 +2,7 @@
  created 29 May 2024
   by William Jimenez
   Maintenance Technician - Cartagena
-  modified 29 May 2024
+  last edit 02 Jun 2024
   by William Jimenez
   Maintenance Technician - Cartagena
 */
@@ -21,22 +21,23 @@ const int valvPrtOpen = 30;     //Final de carrera válvula babor abierta
 const int pumpReset = 31;       //Pulsador para reset de falla de bomba suministro
 const int commandOpenStr = 32;  //Comando de apertura válvula estribor
 const int commandOpenPrt = 33;  //Comando de apertura válvula babor
+const int starterFailure = 34;    //Arrancador de la bomba de suministro en falla
 
 //Borneras de salidas digitales
-const int runningSt = 34;         //Indicador parpadeando de sistema operando
-const int giro1ValvStr = 35;      //Comando giro apertura válvula estribir
-const int giro2ValvStr = 36;      //Comando giro de cierre válvula estribor
+const int runningSt = 35;         //Indicador parpadeando de sistema operando
+const int giro1ValvStr = 36;      //Comando giro apertura válvula estribir
+const int giro2ValvStr = 37;      //Comando giro de cierre válvula estribor
 const int pwmValvStr = 44;        //Señal PWM motorreductor válvula estribor
-const int giro1ValvPrt = 37;      //Comando giro apertura válvula babor
-const int giro2ValvPrt = 38;      //Comando giro de cierre válvula babor
+const int giro1ValvPrt = 38;      //Comando giro apertura válvula babor
+const int giro2ValvPrt = 39;      //Comando giro de cierre válvula babor
 const int pwmValvPrt = 46;        //Señal PWM motorreductor válvula babor
-const int permPump = 39;          //Permisivo para energizar bomba suministro
-const int eStopInd = 40;          //Indicador de parada de emergencia activa
-const int valvStrOpenInd = 41;    //Indicador LED de válvula estribor abierta
-const int valvStrClosedInd = 42;  //Indicador LED de válvula estribor cerrada
-const int valvPrtOpenInd = 43;    //Indicador LED de válvula babor abierta
-const int valvPrtClosedInd = 45;  //Indicador LED de válvula babor cerrada
-const int pumpFaultRst = 47;      //Reset de falla bomba suministro
+const int permPump = 40;          //Permisivo para energizar bomba suministro
+const int eStopInd = 41;          //Indicador de parada de emergencia activa
+const int valvStrOpenInd = 42;    //Indicador LED de válvula estribor abierta
+const int valvStrClosedInd = 43;  //Indicador LED de válvula estribor cerrada
+const int valvPrtOpenInd = 45;    //Indicador LED de válvula babor abierta
+const int valvPrtClosedInd = 47;  //Indicador LED de válvula babor cerrada
+const int pumpFaultRst = 48;      //Reset de falla bomba suministro
 
 //Variables para procesamiento intermitencia running
 bool ledState = LOW;               // Para variar el estado del LED
