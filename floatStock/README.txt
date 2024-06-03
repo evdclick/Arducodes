@@ -28,6 +28,7 @@ Indicador LED de válvula estribor cerrada         43            20             
 Indicador LED de válvula babor abierta            45            21             SALIDA       valvPrtOpenInd
 Indicador LED de válvula babor cerrada            47            22             SALIDA       valvPrtClosedInd
 Reset de falla bomba suministro                   48            23             SALIDA       pumpFaultRst
+Indicador LED falla arrancador bomba suministro   49            24             SALIDA       pumpStartFailure
 
 
 Las definiciones restantes de señales lógicas y condicionales se encuentran definidas internamente en el código pero serán referidas parcialmente en documentación.
