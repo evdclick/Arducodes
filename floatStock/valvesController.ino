@@ -38,6 +38,7 @@ const int valvStrClosedInd = 43;  //Indicador LED de válvula estribor cerrada
 const int valvPrtOpenInd = 45;    //Indicador LED de válvula babor abierta
 const int valvPrtClosedInd = 47;  //Indicador LED de válvula babor cerrada
 const int pumpFaultRst = 48;      //Reset de falla bomba suministro
+const int pumpStartFailure = 49;  //Indicador LED de falla arrancador bomba suministro
 
 //Variables para procesamiento intermitencia running
 bool ledState = LOW;               // Para variar el estado del LED
@@ -83,6 +84,8 @@ void setup() {
   digitalWrite(valvPrtClosedInd, HIGH);  //Forzar indicador de valvula babor cerrada
   pinMode(pumpFaultRst, OUTPUT);         //Reset de falla bomba suministro
   digitalWrite(pumpFaultRst, HIGH);      //Inmovilizar relé de reset arrancador bomba suministro
+  pinMode(pumpStartFailure, OUTPUT);     //Indicador LED de falla arrancador bomba suministro
+  digitalWrite(pumpStartFailure, HIGH);  //Forzar indicador LED de falla arrancador bomba suministro
   delay(5000);                           //Aguardar 5 segundos para permitir diagnóstico de componentes en arranque
 }
 
