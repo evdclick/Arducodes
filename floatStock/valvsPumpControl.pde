@@ -24,7 +24,7 @@ int valor;
 float rojo;
 float verde;
 float azul;
-byte[] clip = new byte[32];
+byte[] clip = new byte[32]; //Armar un array de 32 bytes para lectura del dataframe
 
 color redColor = color(250, 0, 0);
 color greenColor = color(0, 75, 00);
@@ -38,14 +38,14 @@ PImage img;
 
 void setup() {
   println(Serial.list());
-  myPort = new Serial(this, Serial.list()[0], 115200);
+  myPort = new Serial(this, Serial.list()[0], 19200);
   //output = createWriter("temp.txt");
 
 
 
   size(800, 600);
-  background(134, 92, 181); //Azul puerto
-  PFont f = loadFont("Arial-BoldMT-48.vlw"); //Tipo de fuente. Si no existe, se crea desde TOOLS 
+  background(134, 92, 181); //Violeta Impala Terminals
+  PFont f = loadFont("Arial-BoldMT-48.vlw"); //Tipo de fuente. Si no existe, se crea desde TOOLS
   textFont(f, 38);
   textAlign(CENTER);
   fill (237, 240, 252);
@@ -56,14 +56,15 @@ void setup() {
   textFont(f, 18);
   textAlign(LEFT);
   text("Valvula motorizada estribor", 30, 120);
-  text("Estados de alarma y operación", 500, 120);
   text("Ejecutando apertura", 95, 155);
-  text("Pulso operativo", 585, 160);
   text("Ejecutando cierre", 95, 195);
-  text("Parada Emergencia", 585, 200);
   text("Válvula totalmente cerrada", 95, 235);
-  text("Falla bomba suministro", 585, 240);
   text("Válvula totalmente abierta", 95, 275);
+  
+  text("Estados de alarma y operación", 500, 120);
+  text("Pulso operativo", 585, 160);
+  text("Parada Emergencia", 585, 200);
+  text("Falla bomba suministro", 585, 240);
   text("TAG leído babor", 585, 280);
   text("TAG leído estribor", 585, 320);
   text("Perm. bomba suministro", 585, 360);
@@ -82,17 +83,14 @@ void setup() {
     img = loadImage("logpnsacolor.png");
     image(img, 5, 5, width/5, height/7);
   }
-  
 }
 
 
 void draw() {
-
-  if (myPort.available()>31) {  
-     clip=myPort.readBytes();
+  if (myPort.available()>31) {
+    clip=myPort.readBytes(); //A la espera del puerto y recibo dataframe de 32 bytes
   }
   long current_time=millis();
-
 
   if ((current_time - last_time)> duration) {
     println(current_time);
@@ -103,16 +101,18 @@ void draw() {
       blinker=byte(200);
     }
   }
-
+  /*
   for (byte tex=0; tex<=31; tex++) {
-    clip[tex]=byte(200);
-  }
+   clip[tex]=byte(200);
+   }
+   */
+  //  clip[8]=blinker;
+  //  clip[8]=clip[0]; //clip[0] es el statusRunning del controlador
 
-  clip[8]=blinker;
-
-  float[] xpos = {560, 560, 560, 560, 560,  70,  70,  70,  70,  70,  70,  70, 560, 850,  70}; 
-  float[] ypos = {270, 230, 190, 310, 150, 150, 190, 230, 270, 480, 520, 400, 350, 650, 440};
+  float[] xpos = {560, 560, 560, 560, 560, 70, 70, 70, 70, 70, 70, 70, 560, 850, 70};
+  float[] ypos = {150, 230, 270, 310, 190, 150, 190, 230, 270, 480, 520, 400, 350, 650, 440};
   float d1p=28;
+  //clip[4]=byte(200);
   for (byte i=0; i<15; i++) {
     statusIndicator(clip[i], xpos[i], ypos[i], d1p, d1p);
   }
@@ -126,7 +126,7 @@ void stateType(byte value) {
   } else {
     fill(redColor); //Colores para rojo
   }
-} 
+}
 
 //To scan status byte array and indicate each one of them according to table order from arduino
 void statusIndicator(byte stFlag, float xcord, float ycord, float d1, float d2) {
@@ -159,11 +159,11 @@ void draw() {
  //Crear texto de color negro con la palabra led
  fill (0, 0, 0);
  //PFont f;
- PFont f = loadFont("Aharoni-Bold-50.vlw"); //Tipo de fuente. Si no existe, se crea desde TOOLS 
+ PFont f = loadFont("Aharoni-Bold-50.vlw"); //Tipo de fuente. Si no existe, se crea desde TOOLS
  textFont(f, 20);
  text(texto, 170, 270);
  
- if (myPort.available()>31) {  
+ if (myPort.available()>31) {
  clip=myPort.readBytes();
  }
  
